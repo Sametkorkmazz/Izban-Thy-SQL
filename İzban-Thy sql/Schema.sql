@@ -61,7 +61,7 @@ constraint travel_history_without_ticketFK foreign key (Card_id) references turk
 create table trip (
 type varchar(30),
 destination varchar(80),
-Id char(4) primary key,
+Id char(8) primary key,
 operator varchar(30),
 weekdays varchar(21)
 );
