@@ -67,18 +67,18 @@ weekdays varchar(21)
 );
 
 create table leg (
-Trip_id char(4),
+Trip_id char(8),
 leg_no int,
-scheduled_arrival_station_name varchar(50),
-scheduled_arrival_station_country varchar(50),
 scheduled_departure_station_name varchar(50),
 scheduled_departure_station_country varchar(50),
+scheduled_arrival_station_name varchar(50),
+scheduled_arrival_station_country varchar(50),
 constraint leg_PK primary key (Trip_id,leg_no),
 constraint leg_FK foreign key (trip_id) references trip(id)
 );
 
 create table leg_instance(
-Trip_id char(4),
+Trip_id char(8),
 leg_no int,
 start_date timestamp,
 end_date timestamp,
@@ -97,28 +97,8 @@ country varchar(30),
 city varchar(30),
 adress varchar(80),
 type varchar(20),
-constraint station_PK primary key (name,country)
-);
-
-create table airport(
-Name varchar(30),
-country varchar(30),
-city varchar(30),
-adress varchar(80),
-type varchar(20),
-constraint airport_PK primary key (name,country),
-constraint airportFK foreign key (name,country) references station (name,country)
-);
-
-create table izban_station(
-Name varchar(30),
-country varchar(30),
-city varchar(30),
-adress varchar(80),
-type varchar(20),
 transfer varchar(30),
-constraint izban_PK primary key (name,country),
-constraint izbanFK foreign key (name,country) references station (name,country)
+constraint station_PK primary key (name,country)
 );
 
 create table izban_station_fee(
@@ -127,7 +107,7 @@ country varchar(30),
 card_type varchar(20),
 price float,
 constraint fee_PK primary key (name,country,card_type,price),
-constraint station_feeFK foreign key (name,country) references izban_station(name,country)
+constraint station_feeFK foreign key (name,country) references station(name,country)
 );
 
 create table izban_bus_transport_list(
@@ -135,7 +115,7 @@ Name varchar(30),
 country varchar(30),
 bus_number int,
 constraint bus_PK primary key (name,country,bus_number),
-constraint bus_PK foreign key (name,country) references izban_station(name,country)
+constraint bus_PK foreign key (name,country) references station(name,country)
 );
 
 create table vehicle (
