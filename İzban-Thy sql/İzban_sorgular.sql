@@ -4,3 +4,11 @@ from leg_instance le_dpt , leg_instance le_arr, trip tr, leg
 where le_dpt.departure_station_name = 'Bayraklı' and le_arr.arrival_station_name = 'Belevi' and le_dpt.Trip_id = leg.trip_id and le_dpt.leg_no = leg.leg_no and leg.trip_id = tr.id 
 and hour(le_dpt.start_date) between 12 and 12;
 select l.trip_id,l.leg_no,l.scheduled_departure_station_name kalkış_yeri,l.scheduled_arrival_station_name varış_yeri from leg; 
+
+select tr.Id,tr.operator,tr.type,tr.destination
+from trip tr
+where EXISTS ( select * 
+				from  leg le_dpt, leg le_arr
+                where tr.id = le_dpt.Trip_id and tr.id = le_arr.trip_id and le_dpt.scheduled_departure_station_name = 'Demirköprü' and le_arr.scheduled_arrival_station_name = 'Halkapınar'
+                and le_arr.leg_no - le_dpt.leg_no > 0
+                ); 
